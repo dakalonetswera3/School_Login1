@@ -43,4 +43,35 @@ public class MessageTest {
         assertEquals("Press 0 to delete the message.", message.sentMessage("0"));
         assertEquals("Message successfully stored.", message.sentMessage("2"));
     }
+   @Test
+    public void testDisplayLongestMessage() {
+        Message msg = new Message();
+        msg.loadTestData();
+        String longest = msg.displayLongestMessage();
+        assertEquals("Where are you? You are late! I have asked you to be on time.", longest);
+    }
+
+    @Test
+    public void testSearchByMessageID() {
+        Message msg = new Message();
+        msg.loadTestData();
+        String result = msg.searchByMessageID("ID002");
+        org.junit.Assert.assertTrue(result.contains("+27838884567"));
+    }
+
+    @Test
+    public void testSearchByRecipient() {
+        Message msg = new Message();
+        msg.loadTestData();
+        String result = msg.searchByRecipient("+27838884567");
+        org.junit.Assert.assertTrue(result.contains("Where are you?"));
+    }
+
+    @Test
+    public void testDeleteMessageByHash() {
+        Message msg = new Message();
+        msg.loadTestData();
+        boolean deleted = msg.deleteMessageByHash("ID:2:WHERETIME");
+        org.junit.Assert.assertTrue(deleted);
+    } 
 }
